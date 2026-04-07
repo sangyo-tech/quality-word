@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>品質管理 用語辞典 - 産業技術アカデミー</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a1628;
+            --accent: #c8a84e;
+            --text: #ffffff;
+            --border: #1a2f4f;
+            --hover: #1a3a5c;
+            --success: #4ade80;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* ===== ナビバー ===== */
+        .navbar {
+            background-color: #060d1a;
+            border-bottom: 1px solid #1a2a4a;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+            position: sticky;
+            top: 0;
+            z-index: 900;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .nav-brand-en {
+            font-size: 0.6rem;
+            color: #808a9a;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .nav-brand-ja {
+            font-size: 0.95rem;
+            color: #c8a84e;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a {
+            color: #b0b8c8;
+            text-decoration: none;
+            font-size: 0.85rem;
+            padding: 8px 14px;
+            border-radius: 6px;
+            transition: all 0.25s ease;
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background-color: rgba(200, 168, 78, 0.12);
+        }
+
+        .nav-links a.active {
+            color: #c8a84e;
+            background-color: rgba(200, 168, 78, 0.15);
+            font-weight: 600;
+        }
+
+        .nav-links a.nav-cta {
+            color: #0a1628;
+            background-color: #c8a84e;
+            font-weight: 600;
+            border-radius: 20px;
+            padding: 8px 18px;
+        }
+
+        .nav-links a.nav-cta:hover {
+            background-color: #e6c76e;
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #c8a84e;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        /* ===== ヘッダー ===== */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2340 100%);
+            border-bottom: 2px solid var(--accent);
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: var(--accent);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-content p {
+            font-size: 1.1em;
+            color: #b0c4de;
+            margin-bottom: 15px;
+        }
+
+        .header-stats {
+            font-size: 0.95em;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ===== メインコンテナ ===== */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* ===== 検索セクション ===== */
+        .search-section {
+            background: var(--hover);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid var(--border);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 16px;
+            font-size: 1em;
+            background-color: var(--primary);
+            border: 2px solid var(--accent);
+            border-radius: 6px;
+            color: var(--text);
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #e8c96f;
+            box-shadow: 0 0 8px rgba(200, 168, 78, 0.3);
+        }
+
+        .search-input::placeholder {
+            color: #707080;
+        }
+
+        /* ===== カテゴリタブ ===== */
+        .category-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .category-tabs::-webkit-scrollbar {
+            height: 6px;
+        }
+
+        .category-tabs::-webkit-scrollbar-track {
+            background: var(--border);
+            border-radius: 3px;
+        }
+
+        .category-tabs::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 3px;
+        }
+
+        .category-tab {
+            padding: 10px 16px;
+            border: 2px solid var(--border);
+            background-color: var(--primary);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .category-tab:hover {
+            border-color: var(--accent);
+            background-color: var(--hover);
+        }
+
+        .category-tab.active {
+            background-color: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ===== インデックス ===== */
+        .index-section {
+            background: var(--hover);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .index-title {
+            font-size: 0.9em;
+            color: var(--accent);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .index-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .index-btn {
+            padding: 6px 10px;
+            font-size: 0.85em;
+            background-color: var(--primary);
+            border: 1px solid var(--border);
+            color: var(--text);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .index-btn:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* ===== 用語リスト ===== */
+        .terms-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .term-card {
+            background: var(--hover);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+            overflow: hidden;
+            scroll-margin-top: 80px;
+        }
+
+        .term-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(200, 168, 78, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .term-header {
+            padding: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .term-title-section {
+            flex: 1;
+        }
+
+        .term-name-ja {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 4px;
+        }
+
+        .term-name-en {
+            font-size: 0.95em;
+            color: #b0c4de;
+            font-style: italic;
+        }
+
+        .term-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .badge-qc {
+            background-color: rgba(74, 222, 128, 0.2);
+            color: #4ade80;
+            border: 1px solid #4ade80;
+        }
+
+        .badge-stats {
+            background-color: rgba(100, 200, 255, 0.2);
+            color: #64c8ff;
+            border: 1px solid #64c8ff;
+        }
+
+        .badge-iso {
+            background-color: rgba(255, 165, 0, 0.2);
+            color: #ffa500;
+            border: 1px solid #ffa500;
+        }
+
+        .badge-kaizen {
+            background-color: rgba(220, 20, 60, 0.2);
+            color: #dc143c;
+            border: 1px solid #dc143c;
+        }
+
+        .badge-inspection {
+            background-color: rgba(138, 43, 226, 0.2);
+            color: #8a2be2;
+            border: 1px solid #8a2be2;
+        }
+
+        .badge-management {
+            background-color: rgba(30, 144, 255, 0.2);
+            color: #1e90ff;
+            border: 1px solid #1e90ff;
+        }
+
+        .expand-icon {
+            font-size: 1.5em;
+            color: var(--accent);
+            transition: transform 0.3s;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .term-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .term-definition {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            background-color: var(--primary);
+            border-top: 1px solid var(--border);
+        }
+
+        .term-card.expanded .term-definition {
+            max-height: 500px;
+            padding: 16px;
+        }
+
+        .definition-text {
+            margin-bottom: 12px;
+            line-height: 1.7;
+            color: #d0d8e0;
+        }
+
+        .related-terms {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid var(--border);
+        }
+
+        .related-label {
+            font-size: 0.9em;
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .related-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .related-link {
+            padding: 6px 12px;
+            background-color: var(--hover);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.2s;
+        }
+
+        .related-link:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        /* ===== アクションバー ===== */
+        .action-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #e8c96f;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(200, 168, 78, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--hover);
+            color: var(--text);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent);
+            color: var(--primary);
+        }
+
+        /* ===== メッセージ ===== */
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #b0c4de;
+            font-size: 1.1em;
+        }
+
+        .no-results svg {
+            width: 60px;
+            height: 60px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        /* ===== フッター ===== */
+        footer {
+            background-color: var(--primary);
+            border-top: 1px solid var(--border);
+            padding: 20px;
+            text-align: center;
+            color: #707080;
+            margin-top: 40px;
+            font-size: 0.9em;
+        }
+
+        /* ===== レスポンシブ対応 ===== */
+        @media (max-width: 1100px) {
+            .navbar {
+                padding: 0 16px;
+            }
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background-color: #060d1a;
+                border-bottom: 1px solid #1a2a4a;
+                flex-direction: column;
+                padding: 12px 16px;
+                gap: 4px;
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
+
+            .header-content h1 {
+                font-size: 1.8em;
+            }
+
+            .header-content p {
+                font-size: 0.95em;
+            }
+
+            .container {
+                padding: 12px;
+            }
+
+            .term-name-ja {
+                font-size: 1em;
+            }
+
+            .term-header {
+                padding: 12px;
+            }
+
+            .action-bar {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 12px 16px;
+            }
+        }
+
+        /* ===== ハイライト ===== */
+        .highlight {
+            animation: highlight-pulse 0.6s ease-out;
+        }
+
+        @keyframes highlight-pulse {
+            0% {
+                background-color: rgba(200, 168, 78, 0.3);
+                border-color: var(--accent);
+            }
+            100% {
+                background-color: var(--hover);
+                border-color: var(--border);
+            }
+        }
+
+        /* ===== ローディング ===== */
+        @keyframes shimmer {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="https://sangyo-tech.jp/" class="nav-brand">
+            <div>
+                <div class="nav-brand-en">Industrial Technology Academy</div>
+                <div class="nav-brand-ja">産業技術アカデミー</div>
+            </div>
+        </a>
+        <button class="nav-toggle" onclick="toggleNav()" aria-label="メニュー">☰</button>
+        <div class="nav-links" id="navLinks">
+            <a href="https://sangyo-tech.jp/">TOP</a>
+            <a href="skill-assessment.html">スキル診断</a>
+            <a href="glossary.html" class="active">用語辞典</a>
+            <a href="qc7-tools-reference.html">QC7つ道具</a>
+            <a href="https://sangyo-tech-testt.ulizaportal.jp/" class="nav-cta">無料体験</a>
+            <a href="https://pricing.sangyo-tech.jp/">料金プラン</a>
+            <a href="https://about-us.sangyo-tech.jp/">私たちについて</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-content">
+            <h1>品質管理 用語辞典</h1>
+            <p>製造業で使われる品質管理の専門用語を網羅</p>
+            <div class="header-stats">
+                <span id="totalTermsCount">全 91 語</span>を収録
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- 検索セクション -->
+        <div class="search-section">
+            <input type="text" id="searchInput" class="search-input" placeholder="用語名または英語で検索... (例: 品質管理, PDCA)">
+        </div>
+
+        <!-- カテゴリタブ -->
+        <div class="category-tabs" id="categoryTabs">
+            <button class="category-tab active" data-category="all">全て</button>
+            <button class="category-tab" data-category="qc">QC基礎</button>
+            <button class="category-tab" data-category="stats">統計</button>
+            <button class="category-tab" data-category="iso">ISO</button>
+            <button class="category-tab" data-category="kaizen">改善手法</button>
+            <button class="category-tab" data-category="inspection">検査</button>
+            <button class="category-tab" data-category="management">マネジメント</button>
+        </div>
+
+        <!-- インデックス -->
+        <div class="index-section">
+            <div class="index-title">50音順・アルファベットインデックス</div>
+            <div class="index-buttons" id="indexButtons"></div>
+        </div>
+
+        <!-- アクションバー -->
+        <div class="action-bar">
+            <button id="randomTermBtn" class="btn btn-primary">🎲 今日の一語</button>
+        </div>
+
+        <!-- 用語リスト -->
+        <div class="terms-container" id="termsContainer"></div>
+
+        <!-- メッセージ -->
+        <div id="noResults" class="no-results" style="display: none;">
+            <p>該当する用語が見つかりません</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2025 産業技術アカデミー</p>
+    </footer>
+
+    <script>
+        // ナビバー開閉
+        function toggleNav() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+
+        // ===== データ定義 =====
+        const terms = [
+            // ※ 各用語の説明は学習用に独自に作成した解説です。ISO規格等の公式な定義とは異なります。
+            // QC基礎 (1-22)
+            { id: 1, ja: "品質", en: "Quality", category: "qc", definition: "製品やサービスがお客様の期待にどれだけ応えているかを表す考え方。狭い意味では製品そのものの出来栄え、広い意味ではコストや納期も含めた総合的な評価を指す", related: [2, 3, 15] },
+            { id: 2, ja: "品質管理", en: "Quality Control / QC", category: "qc", definition: "良い製品を安定して作り続けるための取り組み全般。工程の管理や検査、日々の改善活動を含む", related: [3, 4, 22] },
+            { id: 3, ja: "品質保証", en: "Quality Assurance / QA", category: "qc", definition: "お客様に『この製品なら安心して使える』と信頼してもらえるようにする活動", related: [2, 36, 42] },
+            { id: 4, ja: "TQM", en: "Total Quality Management", category: "qc", definition: "会社全体で品質を大切にする経営方針。会社のトップから現場の作業者まで全員が品質向上に力を入れる", related: [5, 78, 79] },
+            { id: 5, ja: "PDCA", en: "Plan-Do-Check-Act", category: "qc", definition: "良い製品を作るための方法論。計画を立てて（P）実行し（D）結果をチェック（C）して改善する（A）という流れを繰り返す", related: [6, 56, 4] },
+            { id: 6, ja: "SDCA", en: "Standardize-Do-Check-Act", category: "qc", definition: "できた方法を決めたルール通りに保ち続ける方法。実行（D）→確認（C）→改善（A）→ルール化（S）という流れで品質を守り続ける", related: [5, 13, 9] },
+            { id: 7, ja: "QCサークル", en: "QC Circle", category: "qc", definition: "工場の現場で働く人たちが小さなグループを作って、自分たちで品質を良くするための工夫や改善を行う活動", related: [56, 4, 9] },
+            { id: 8, ja: "方針管理", en: "Policy Management", category: "qc", definition: "会社全体の方針や目標を各部門に落とし込んで実現させるための仕組みや方法", related: [78, 79, 4] },
+            { id: 9, ja: "日常管理", en: "Daily Management", category: "qc", definition: "毎日の業務で決められたやり方を守って進める管理。問題が起きたらすぐに対処する", related: [6, 13, 10] },
+            { id: 10, ja: "5S", en: "5S", category: "qc", definition: "職場をきれいに整理する5つのステップ。整理・整頓・清掃・清潔・習慣化で快適で安全な職場を作る", related: [9, 11, 91] },
+            { id: 11, ja: "三現主義", en: "Genba/Genbutsu/Genjitsu", category: "qc", definition: "問題を解決するときは実際の現場に行き、実物を見て、現実の状況に基づいて判断する考え方", related: [10, 52, 56] },
+            { id: 12, ja: "後工程はお客様", en: "Next Process is Customer", category: "qc", definition: "次の工程の作業者を顧客と考え、良い品質の製品・部品をきちんと引き渡すという考え方", related: [2, 38, 70] },
+            { id: 13, ja: "標準化", en: "Standardization", category: "qc", definition: "最良のやり方を文書に記録し、全員がそのやり方に従って同じように仕事をする仕組み", related: [6, 9, 45] },
+            { id: 14, ja: "ばらつき", en: "Variation", category: "qc", definition: "製品の大きさや重さなど様々なデータが完全に同じにならず少しずつ違うこと。品質管理では大切な要素", related: [22, 26, 19] },
+            { id: 15, ja: "4M", en: "Man, Machine, Material, Method", category: "qc", definition: "製品の品質を左右する4つの大事な要素：人（Man）、機械（Machine）、材料（Material）、方法（Method）", related: [1, 17, 59] },
+            { id: 16, ja: "パレート図", en: "Pareto Chart", category: "qc", definition: "不良品の種類を多い順に並べて棒グラフで表し、全体の何パーセントを占めるかを曲線で示した図", related: [17, 20, 52] },
+            { id: 17, ja: "特性要因図", en: "Cause and Effect Diagram", category: "qc", definition: "問題の原因と結果の関係を図で整理した手法。魚の骨のような形になることから『フィッシュボーン図』とも呼ぶ", related: [16, 52, 15] },
+            { id: 18, ja: "ヒストグラム", en: "Histogram", category: "qc", definition: "集めたデータがどのように分布しているかを柱状グラフで見やすく表した図", related: [20, 27, 22] },
+            { id: 19, ja: "管理図", en: "Control Chart", category: "qc", definition: "製造工程が安定して良い製品を作り続けているかを、時間の流れに沿ってデータを記録した図", related: [14, 28, 29] },
+            { id: 20, ja: "散布図", en: "Scatter Diagram", category: "qc", definition: "2つの異なる値の関係を点々でプロットして、どんな関係があるかを視覚的に表した図", related: [16, 30, 31] },
+            { id: 21, ja: "チェックシート", en: "Check Sheet", category: "qc", definition: "データをたくさん集めるときに、目的に合わせた用紙を使って簡単に記録する工夫", related: [22, 46, 16] },
+            { id: 22, ja: "層別", en: "Stratification", category: "qc", definition: "たくさん集めたデータを色々な項目に分けて詳しく分析する手法", related: [21, 14, 2] },
+            // 統計 (23-34)
+            { id: 23, ja: "母集団", en: "Population", category: "stats", definition: "調べたい対象のすべて。例えば会社で作った全製品、全従業員など", related: [24, 32, 25] },
+            { id: 24, ja: "標本", en: "Sample", category: "stats", definition: "全体から選び出した一部分。データ分析では全部を調べずに一部を取り出して調べることが多い", related: [23, 68, 33] },
+            { id: 25, ja: "平均値", en: "Mean", category: "stats", definition: "データを全部足して個数で割った値。データの代表的な値を表す", related: [26, 27, 23] },
+            { id: 26, ja: "標準偏差", en: "Standard Deviation", category: "stats", definition: "データが平均からどれくらい散らばっているかを数字で表したもの。散らばりが大きいほど値が大きい", related: [25, 27, 14] },
+            { id: 27, ja: "正規分布", en: "Normal Distribution", category: "stats", definition: "たくさんのデータを集めるとグラフ化したとき、中央が高くて両側がなだらかに下がる左右対称の形になるという性質", related: [26, 28, 29] },
+            { id: 28, ja: "工程能力指数 Cp", en: "Process Capability Index", category: "stats", definition: "製造工程の安定性を評価する指標。規格の幅と実際のばらつきを比べることで、工程がどれくらい安定しているか見る", related: [29, 19, 27] },
+            { id: 29, ja: "工程能力指数 Cpk", en: "Cpk", category: "stats", definition: "工程が規格の中心からどれくらいずれているかも考えた安定性の評価。Cpより精密な評価ができる", related: [28, 26, 27] },
+            { id: 30, ja: "相関係数", en: "Correlation Coefficient", category: "stats", definition: "2つの値が一緒に変わる強さを数字で示したもの。値が1に近いほど強い関係がある", related: [31, 20, 26] },
+            { id: 31, ja: "回帰分析", en: "Regression Analysis", category: "stats", definition: "2つの値の関係をグラフや式で表す統計の方法。1つの値がもう1つの値を予測するのに役立つ", related: [30, 20, 32] },
+            { id: 32, ja: "検定・推定", en: "Hypothesis Testing / Estimation", category: "stats", definition: "集めたデータから正しい判断を下すための統計的な手法と考え方", related: [31, 23, 24] },
+            { id: 33, ja: "AQL", en: "Acceptable Quality Level", category: "stats", definition: "抜き取り検査で『このくらいなら合格』と決める基準値。不良品がこの割合以下なら合格とする", related: [34, 68, 24] },
+            { id: 34, ja: "OC曲線", en: "Operating Characteristic Curve", category: "stats", definition: "抜き取り検査で、サンプルの合否パターンとロット全体の合格確率の関係を表す曲線", related: [33, 68, 28] },
+            // ISO (35-51)
+            { id: 35, ja: "ISO9001", en: "ISO9001", category: "iso", definition: "品質を確保するための仕組みを国際的に定めた標準的なきまり", related: [36, 48, 39] },
+            { id: 36, ja: "QMS", en: "Quality Management System", category: "iso", definition: "品質に関する目標を決めて、それを達成するための全社的な仕組みと活動", related: [35, 39, 41] },
+            { id: 37, ja: "リスクに基づく考え方", en: "Risk-Based Thinking", category: "iso", definition: "品質管理では、何か問題が起きてから対処するのではなく、あらかじめ問題を予測して防ぐという考え方", related: [90, 36, 53] },
+            { id: 38, ja: "利害関係者", en: "Interested Parties", category: "iso", definition: "会社の経営や製品に関心を持ち、影響を受ける人たちや組織。顧客や従業員、取引先など", related: [36, 39, 12] },
+            { id: 39, ja: "プロセスアプローチ", en: "Process Approach", category: "iso", definition: "会社の活動全体を繋がった一連の工程（プロセス）として考えて、効率よく管理する手法", related: [36, 40, 61] },
+            { id: 40, ja: "内部監査", en: "Internal Audit", category: "iso", definition: "会社の中から人を決めて、品質管理の仕組みが正しく作られ、実際に役立っているかを調べる活動", related: [39, 41, 48] },
+            { id: 41, ja: "マネジメントレビュー", en: "Management Review", category: "iso", definition: "経営層が定期的に品質管理の仕組みの状況を見直し、改善すべき点を指示する会議", related: [40, 36, 8] },
+            { id: 42, ja: "不適合", en: "Nonconformity", category: "iso", definition: "求められていることができていない、決まりを守れていない状態", related: [43, 44, 3] },
+            { id: 43, ja: "是正処置", en: "Corrective Action", category: "iso", definition: "問題が起きた根本的な原因を突き止めて取り除き、同じ問題が二度と起きないようにする対応", related: [42, 44, 89] },
+            { id: 44, ja: "予防処置", en: "Preventive Action", category: "iso", definition: "まだ起きていないけれど起こりそうな問題の原因を事前に除去して、問題の発生を未然に防ぐ対応", related: [43, 42, 89] },
+            { id: 45, ja: "文書管理", en: "Document Control", category: "iso", definition: "品質に関する大切な文書を作ったり、修正したり、どこの部門に配っているかを管理する仕組み", related: [46, 13, 40] },
+            { id: 46, ja: "記録管理", en: "Records Management", category: "iso", definition: "品質に関する重要な記録や証拠を適切に保管して、必要なときすぐに探し出せるようにする管理", related: [45, 21, 77] },
+            { id: 47, ja: "適用範囲", en: "Scope", category: "iso", definition: "品質管理の仕組みがどの製品、どの工程、どのサービスに適用されるかの範囲", related: [36, 35, 39] },
+            { id: 48, ja: "認証", en: "Certification", category: "iso", definition: "外部の公式な審査機関が品質管理の仕組みが正しく作られているかを確認して認める", related: [35, 40, 41] },
+            { id: 49, ja: "ISO13485", en: "ISO13485", category: "iso", definition: "医療機器を安全に作るための品質管理の国際的なきまり", related: [35, 50, 49] },
+            { id: 50, ja: "IATF16949", en: "IATF16949", category: "iso", definition: "自動車産業で求められる品質管理のシステムを定めた国際的なきまり", related: [49, 35, 53] },
+            { id: 51, ja: "ISO14001", en: "ISO14001", category: "iso", definition: "会社が自然環境に与える悪い影響を減らすための管理体制に関する国際的なきまり", related: [35, 36, 51] },
+            // 改善手法 (52-66)
+            { id: 52, ja: "なぜなぜ分析", en: "Why-Why Analysis", category: "kaizen", definition: "問題が起きたとき『なぜそうなったのか』と何度も『なぜ』と問い続けることで、本当の原因に辿り着く探究方法", related: [53, 17, 56] },
+            { id: 53, ja: "FMEA", en: "Failure Mode and Effects Analysis", category: "kaizen", definition: "機械や製品がどう壊れるかと、その壊れ方がどんな影響をもたらすかを事前に予測して分析する手法", related: [54, 52, 37] },
+            { id: 54, ja: "RPN", en: "Risk Priority Number", category: "kaizen", definition: "問題がどれくらい深刻か（影響度）、どのくらい起こりやすいか（発生度）、気付きやすいか（検出度）を掛け合わせた値", related: [53, 90, 37] },
+            { id: 55, ja: "QCストーリー", en: "QC Story", category: "kaizen", definition: "問題を見つけてから解決して実行するまでの標準的な進め方の流れ", related: [56, 5, 52] },
+            { id: 56, ja: "改善", en: "Kaizen", category: "kaizen", definition: "今のやり方をもっと良くするために、少しずつ工夫や改善を積み重ねていく取り組み", related: [55, 5, 7] },
+            { id: 57, ja: "源流管理", en: "Source Control", category: "kaizen", definition: "製品の設計段階から品質を作り込むことを大切にする管理方法。後で直すより最初から良くする", related: [56, 59, 60] },
+            { id: 58, ja: "ポカヨケ", en: "Poka-Yoke", category: "kaizen", definition: "作業者の誤りを物理的に防ぐ工夫。例えば部品が違う向きにしか入らないようにするなど", related: [59, 71, 61] },
+            { id: 59, ja: "変化点管理", en: "Change Point Management", category: "kaizen", definition: "製品や工程の作り方が変わったときは、その変化がないかをよく監視して品質が落ちるのを防ぐ管理", related: [58, 15, 60] },
+            { id: 60, ja: "初期流動管理", en: "Initial Production Control", category: "kaizen", definition: "新しい製品や新しい工程で製造を始めるとき、品質が安定するまでの間を特別に管理する", related: [59, 57, 19] },
+            { id: 61, ja: "トヨタ生産方式 TPS", en: "Toyota Production System", category: "kaizen", definition: "トヨタが開発した生産方式。必要な分だけ必要な時に作る（ジャストインタイム）と、機械に問題があったらすぐ止める（自働化）が特徴", related: [62, 39, 9] },
+            { id: 62, ja: "カンバン方式", en: "Kanban System", category: "kaizen", definition: "後ろの工程が前の工程に『これだけください』と必要な分を取りに行く方式で、在庫を少なくしながら生産する管理", related: [61, 12, 69] },
+            { id: 63, ja: "5W1H", en: "5W1H", category: "kaizen", definition: "仕事や問題を分析するときに使う6つの視点：誰が（Who）何を（What）いつ（When）どこで（Where）なぜ（Why）どうやって（How）", related: [52, 55, 11] },
+            { id: 64, ja: "8Dレポート", en: "8D Report", category: "kaizen", definition: "品質問題が起きたときの解決方法を8つのステップに整理した標準的な報告形式", related: [55, 52, 89] },
+            { id: 65, ja: "バリデーション", en: "Validation", category: "kaizen", definition: "製品が実際の使用条件で期待通りに機能することを、データや試験結果で裏付ける作業", related: [66, 35, 87] },
+            { id: 66, ja: "ベリフィケーション", en: "Verification", category: "kaizen", definition: "製品が決められた基準や仕様通りに作られているかを、測定やテストで確認する作業", related: [65, 66, 3] },
+            // 検査 (67-77)
+            { id: 67, ja: "全数検査", en: "100% Inspection", category: "inspection", definition: "ロット（一まとめ）の中にある全ての製品を1つ1つ検査する方法", related: [68, 72, 70] },
+            { id: 68, ja: "抜取検査", en: "Sampling Inspection", category: "inspection", definition: "ロット全体から少数の製品を取り出して検査し、その結果でロット全体の良し悪しを判定する方法", related: [67, 33, 34] },
+            { id: 69, ja: "受入検査", en: "Incoming Inspection", category: "inspection", definition: "他社から買った部品や原材料が、求める品質であるかを受け取るときに確認する検査", related: [70, 83, 71] },
+            { id: 70, ja: "工程内検査", en: "In-Process Inspection", category: "inspection", definition: "製品を作っている途中の各工程で品質をチェックする検査", related: [69, 71, 62] },
+            { id: 71, ja: "最終検査", en: "Final Inspection", category: "inspection", definition: "製品がすべて完成した後、出荷する前に最後に行う品質確認", related: [70, 72, 67] },
+            { id: 72, ja: "官能検査", en: "Sensory Inspection", category: "inspection", definition: "人間の目、耳、鼻、味、手触りなどを使って製品が良いか悪いかを判定する検査", related: [71, 73, 2] },
+            { id: 73, ja: "非破壊検査", en: "Non-Destructive Testing / NDT", category: "inspection", definition: "製品を傷つけたり壊したりせず、内部の欠陥や問題がないかを見つける高度な検査技術", related: [72, 74, 75] },
+            { id: 74, ja: "測定システム解析 MSA", en: "Measurement System Analysis", category: "inspection", definition: "測定するときの計測機器がどれくらい正確か、何度測ってもブレないか、別の人が測ってもブレないかを評価する手法", related: [75, 73, 76] },
+            { id: 75, ja: "GR&R", en: "Gage Repeatability and Reproducibility", category: "inspection", definition: "測定器を繰り返し使ったときの正確さ（繰返し性）と、異なる人が測ったときの結果の一致度（再現性）を評価すること", related: [74, 76, 28] },
+            { id: 76, ja: "校正", en: "Calibration", category: "inspection", definition: "測定機器が正しい測定をしているかを定期的にチェックして、必要に応じて調整する作業", related: [75, 77, 74] },
+            { id: 77, ja: "トレーサビリティ", en: "Traceability", category: "inspection", definition: "製品がいつどこで作られ、誰が関わり、どこに送られたかなど、その履歴や所在を追跡できる能力", related: [76, 46, 69] },
+            // マネジメント (78-91)
+            { id: 78, ja: "品質方針", en: "Quality Policy", category: "management", definition: "会社のトップが『品質をどの程度大切にするのか』『どんな品質を目指すのか』を明確に示したもの", related: [79, 8, 4] },
+            { id: 79, ja: "品質目標", en: "Quality Objectives", category: "management", definition: "品質方針を実現するために、各部門が具体的に達成することになっている具体的な数値目標", related: [78, 82, 80] },
+            { id: 80, ja: "品質コスト", en: "Cost of Quality", category: "management", definition: "製品の品質を保つために使うお金。不良を防ぐのにかかる費用から、不良が起きたときの費用まで全部の合計", related: [81, 79, 82] },
+            { id: 81, ja: "PAFモデル", en: "Prevention-Appraisal-Failure", category: "management", definition: "品質にかかるお金を分類する方法。防ぐお金（予防）、確認するお金（評価）、失敗したときのお金（内部・外部失敗）に分ける", related: [80, 79, 56] },
+            { id: 82, ja: "KPI", en: "Key Performance Indicator", category: "management", definition: "会社や部門が目標をどれくらい達成できているかを見る重要な評価指標", related: [79, 80, 84] },
+            { id: 83, ja: "サプライヤ管理", en: "Supplier Management", category: "management", definition: "製品の材料を供給してくれる会社を選んだり、その会社の品質が良いか確認したり、より良くなるよう協力する仕組み", related: [69, 84, 85] },
+            { id: 84, ja: "力量", en: "Competence", category: "management", definition: "仕事をするのに必要な知識や技能を持っていることを実際の仕事の中で示すことができる能力", related: [85, 86, 82] },
+            { id: 85, ja: "OJT", en: "On-the-Job Training", category: "management", definition: "新人や既存の従業員が、実際の仕事をしながら上司や先輩から教えてもらう教育訓練の方法", related: [84, 86, 88] },
+            { id: 86, ja: "スキルマップ", en: "Skill Map", category: "management", definition: "従業員1人1人がどんな技能を持っているか、また今後どんな技能を身につけるべきかを一覧にして見やすくした表", related: [85, 84, 9] },
+            { id: 87, ja: "GMP", en: "Good Manufacturing Practice", category: "management", definition: "医薬品や食品など安全が大切な製品を適切な方法で製造するための基準", related: [88, 35, 65] },
+            { id: 88, ja: "HACCP", en: "Hazard Analysis Critical Control Point", category: "management", definition: "食品工場で危険な細菌がないかを分析して、特に気をつけるべきポイントで厳しく管理する安全管理方法", related: [87, 53, 85] },
+            { id: 89, ja: "CAPA", en: "Corrective Action and Preventive Action", category: "management", definition: "品質に問題が起きたときに、その原因を取り除いて再発を防ぐ（是正処置）とこれから起こりそうな問題を事前に防ぐ（予防処置）の2つを統合して管理すること", related: [43, 44, 64] },
+            { id: 90, ja: "リスクマトリクス", en: "Risk Matrix", category: "management", definition: "リスク（起こりそうな悪いこと）を2つの軸で分類して評価する表。『起こりやすさ』と『もし起きたときの影響度』で判定する", related: [37, 54, 53] },
+            { id: 91, ja: "見える化", en: "Visualization", category: "management", definition: "工場の状況や問題点を文書や図で整理し、誰でも一目見て状況がわかるように示す工夫", related: [10, 19, 91] }
+        ];
+
+        // ===== グローバル変数 =====
+        let currentCategory = 'all';
+        let searchTerm = '';
+        let expandedTermId = null;
+        let debounceTimer;
+
+        // ===== 初期化 =====
+        function init() {
+            renderIndexButtons();
+            renderTerms();
+            setupEventListeners();
+        }
+
+        // ===== イベントリスナー設定 =====
+        function setupEventListeners() {
+            // 検索入力
+            document.getElementById('searchInput').addEventListener('input', (e) => {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(() => {
+                    searchTerm = e.target.value.toLowerCase();
+                    renderTerms();
+                }, 200);
+            });
+
+            // カテゴリタブ
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    currentCategory = tab.dataset.category;
+                    renderTerms();
+                });
+            });
+
+            // ランダム用語ボタン
+            document.getElementById('randomTermBtn').addEventListener('click', showRandomTerm);
+        }
+
+        // ===== インデックスボタン生成 =====
+        function renderIndexButtons() {
+            const indexContainer = document.getElementById('indexButtons');
+            const indices = ['あ', 'か', 'さ', 'た', 'な', 'は', 'ま', 'や', 'ら', 'わ', 'A-Z'];
+
+            indices.forEach(idx => {
+                const btn = document.createElement('button');
+                btn.className = 'index-btn';
+                btn.textContent = idx;
+                btn.addEventListener('click', () => jumpToIndex(idx));
+                indexContainer.appendChild(btn);
+            });
+        }
+
+        // ===== インデックスジャンプ =====
+        function jumpToIndex(index) {
+            const filtered = getFilteredTerms();
+            let targetTerm = null;
+
+            if (index === 'A-Z') {
+                targetTerm = filtered.find(t => /^[A-Z0-9]/.test(t.en.charAt(0)));
+            } else {
+                targetTerm = filtered.find(t => {
+                    const first = t.ja.charAt(0);
+                    return first === index;
+                });
+            }
+
+            if (targetTerm) {
+                const element = document.getElementById(`term-${targetTerm.id}`);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                    highlightCard(element);
+                }
+            }
+        }
+
+        // ===== フィルタリング =====
+        function getFilteredTerms() {
+            return terms.filter(term => {
+                const matchCategory = currentCategory === 'all' || term.category === currentCategory;
+                const matchSearch = searchTerm === '' ||
+                    term.ja.toLowerCase().includes(searchTerm) ||
+                    term.en.toLowerCase().includes(searchTerm);
+                return matchCategory && matchSearch;
+            }).sort((a, b) => {
+                // 日本語名でソート
+                return a.ja.localeCompare(b.ja, 'ja');
+            });
+        }
+
+        // ===== 用語リスト描画 =====
+        function renderTerms() {
+            const container = document.getElementById('termsContainer');
+            const noResults = document.getElementById('noResults');
+            const filtered = getFilteredTerms();
+
+            container.innerHTML = '';
+
+            if (filtered.length === 0) {
+                noResults.style.display = 'block';
+                return;
+            }
+
+            noResults.style.display = 'none';
+
+            filtered.forEach(term => {
+                const card = createTermCard(term);
+                container.appendChild(card);
+            });
+        }
+
+        // ===== 用語カード作成 =====
+        function createTermCard(term) {
+            const card = document.createElement('div');
+            card.className = 'term-card';
+            card.id = `term-${term.id}`;
+
+            const categoryLabel = getCategoryLabel(term.category);
+            const badgeClass = getBadgeClass(term.category);
+            const relatedTermsHtml = term.related
+                .map(relatedId => {
+                    const relatedTerm = terms.find(t => t.id === relatedId);
+                    return `<button class="related-link" onclick="jumpToTerm(${relatedId})">${relatedTerm.ja}</button>`;
+                })
+                .join('');
+
+            card.innerHTML = `
+                <div class="term-header" onclick="toggleExpand(this)">
+                    <div class="term-title-section">
+                        <div class="term-name-ja">${term.ja}</div>
+                        <div class="term-name-en">${term.en}</div>
+                        <div class="term-badges">
+                            <span class="badge ${badgeClass}">${categoryLabel}</span>
+                        </div>
+                    </div>
+                    <div class="expand-icon">▼</div>
+                </div>
+                <div class="term-definition">
+                    <div class="definition-text">${term.definition}</div>
+                    <div class="related-terms">
+                        <div class="related-label">関連用語</div>
+                        <div class="related-links">${relatedTermsHtml}</div>
+                    </div>
+                </div>
+            `;
+
+            return card;
+        }
+
+        // ===== カテゴリラベル =====
+        function getCategoryLabel(category) {
+            const labels = {
+                'qc': 'QC基礎',
+                'stats': '統計',
+                'iso': 'ISO',
+                'kaizen': '改善手法',
+                'inspection': '検査',
+                'management': 'マネジメント'
+            };
+            return labels[category] || category;
+        }
+
+        // ===== バッジクラス =====
+        function getBadgeClass(category) {
+            const classes = {
+                'qc': 'badge-qc',
+                'stats': 'badge-stats',
+                'iso': 'badge-iso',
+                'kaizen': 'badge-kaizen',
+                'inspection': 'badge-inspection',
+                'management': 'badge-management'
+            };
+            return classes[category] || '';
+        }
+
+        // ===== 展開トグル =====
+        function toggleExpand(header) {
+            const card = header.closest('.term-card');
+            const isExpanded = card.classList.contains('expanded');
+
+            // 他のカードを閉じる
+            document.querySelectorAll('.term-card.expanded').forEach(c => {
+                if (c !== card) {
+                    c.classList.remove('expanded');
+                }
+            });
+
+            card.classList.toggle('expanded');
+        }
+
+        // ===== 用語へジャンプ =====
+        function jumpToTerm(termId) {
+            const element = document.getElementById(`term-${termId}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                highlightCard(element);
+                element.classList.add('expanded');
+            }
+        }
+
+        // ===== ハイライト =====
+        function highlightCard(element) {
+            element.classList.add('highlight');
+            setTimeout(() => {
+                element.classList.remove('highlight');
+            }, 600);
+        }
+
+        // ===== ランダム用語 =====
+        function showRandomTerm() {
+            const randomTerm = terms[Math.floor(Math.random() * terms.length)];
+
+            // 全カテゴリを表示
+            currentCategory = 'all';
+            document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector('[data-category="all"]').classList.add('active');
+
+            // 検索をクリア
+            searchTerm = '';
+            document.getElementById('searchInput').value = '';
+
+            // 用語をレンダリング
+            renderTerms();
+
+            // ジャンプしてハイライト
+            jumpToTerm(randomTerm.id);
+        }
+
+        // ===== 初期化実行 =====
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
